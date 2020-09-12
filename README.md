@@ -23,9 +23,11 @@ $ ./ticker.sh AAPL
 # Multiple symbols:
 $ ./ticker.sh AAPL MSFT GOOG BTC-USD
 
-# Read from file:
-$ echo "AAPL MSFT GOOG BTC-USD" > ~/.ticker.conf
-$ ./ticker.sh $(cat ~/.ticker.conf)
+# Create custom .conf file:
+$ echo "AAPL MSFT GOOG BTC-USD" > ./ticker.conf
+
+# Use ticker.conf file or substitute with your custom.conf file:
+$ ./ticker.sh $(cat ./ticker.conf)
 
 # Use different colors:
 $ COLOR_BOLD="\e[38;5;248m" \
@@ -38,6 +40,8 @@ $ NO_COLOR=1 ./ticker.sh AAPL
 
 # Update every five seconds:
 $ watch -n 5 -t -c ./ticker.sh AAPL MSFT GOOG BTC-USD
+# With .conf file in same folder:
+$ watch -n 5 -t -c ./ticker.sh $(cat ./ticker.conf)
 # Or if `watch` is not available:
 $ while true; do clear; ./ticker.sh AAPL MSFT GOOG BTC-USD; sleep 5; done
 ```
