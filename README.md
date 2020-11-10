@@ -9,7 +9,7 @@
 ## Install
 
 ```sh
-$ curl -o ticker.sh https://raw.githubusercontent.com/zdecamp/ticker.sh/master/ticker.sh
+$ curl -o ticker.sh https://raw.githubusercontent.com/OfotViking/ticker.sh/master/ticker.sh
 ```
 
 Make sure to install [jq](https://stedolan.github.io/jq/), a versatile command-line JSON processor.
