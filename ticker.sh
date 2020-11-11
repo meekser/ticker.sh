@@ -37,7 +37,7 @@ if [ -z "$SYMBOLS" ] && [ -f $CONFIG ]; then
   SYMBOLS=($(cat $CONFIG))
 fi
 
-FIELDS=(symbol shortName marketState regularMarketPrice regularMarketChange regularMarketChangePercent
+FIELDS=(symbol shortName currency marketState regularMarketPrice regularMarketChange regularMarketChangePercent
   preMarketPrice preMarketChange preMarketChangePercent postMarketPrice postMarketChange postMarketChangePercent)
 API_ENDPOINT="https://query1.finance.yahoo.com/v7/finance/quote?lang=en-US&region=US&corsDomain=finance.yahoo.com"
 
@@ -63,7 +63,7 @@ results=$(curl --silent "$API_ENDPOINT&fields=$fields&symbols=$symbols" |
 query() {
   echo $results | jq -r ".[] | select(.symbol == \"$1\") | .$2"
 }
-printf "%-10s%8s%10s%11s\n" "Symbol" "Price" "VAR" "%VAR"
+printf "%-12s%8s%12s%11s\n" "Symbol" "Price" "VAR" "%VAR"
 for symbol in $(
   IFS=' '
   echo "${SYMBOLS[*]}" | tr '[:lower:]' '[:upper:]'
@@ -76,6 +76,7 @@ for symbol in $(
   fi
 
   name="$(query $symbol 'shortName')"
+  currency="$(query $symbol 'currency')"
   preMarketChange="$(query $symbol 'preMarketChange')"
   postMarketChange="$(query $symbol 'postMarketChange')"
 
@@ -109,8 +110,8 @@ for symbol in $(
   fi
 
   if [ "$price" != "null" ]; then
-    printf "%-10s$COLOR_BOLD%8.2f$COLOR_RESET" $symbol $price
-    printf "$color%10.2f%12s$COLOR_RESET" $diff $(printf "(%.2f%%)" $percent)
+    printf "%-12s$COLOR_BOLD%8.2f$COLOR_RESET %-s" $symbol $price $currency
+    printf "$color%9.2f%12s$COLOR_RESET" $diff $(printf "(%.2f%%)" $percent)
     printf " %-s" "$nonRegularMarketSign" $(printf "%15s" $name)
     printf "\n"
   fi
