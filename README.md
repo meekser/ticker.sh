@@ -23,8 +23,9 @@ $ ./ticker.sh AAPL
 # Multiple symbols:
 $ ./ticker.sh AAPL MSFT GOOG BTC-USD
 
-# Create custom .conf file:
-$ echo "AAPL MSFT GOOG BTC-USD" > ./ticker.conf
+# Create default example .conf file:
+# Default location ~/.config/ticker.conf
+$ ./ticker.sh --make-config
 
 # Use ticker.conf file or substitute with your custom.conf file:
 $ ./ticker.sh $(cat ./ticker.conf)

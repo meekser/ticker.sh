@@ -7,14 +7,34 @@ LC_NUMERIC=C
 
 SYMBOLS=("$@")
 
+CONFIG=~/.config/ticker.conf
+
 if ! $(type jq >/dev/null 2>&1); then
   echo "'jq' is not in the PATH. (See: https://stedolan.github.io/jq/)"
   exit 1
 fi
 
-if [ -z "$SYMBOLS" ]; then
+if [ "$1" == "--make-config" ]; then
+  if [ ! -f $CONFIG ]; then
+    if [ ! -d "$(dirname $CONFIG)" ]; then
+      mkdir -p "$(dirname $CONFIG)"
+    fi
+    echo "making default config ($CONFIG)"
+    printf "NVDA\nTSM\nAMD\nINTC\nMSFT\nGOOG\nGOOGL\nAMZN\nTSLA\nIBM\nAAPL\nBTC-USD\nETH-USD\nXRP-USD\nXLM-USD\nEOS-USD" >$CONFIG
+    exit 1
+  else
+    echo "Error: config already exists ($CONFIG)"
+    exit 1
+  fi
+fi
+
+if [ -z "$SYMBOLS" ] && [ ! -f $CONFIG ]; then
   echo "Usage: ./ticker.sh AAPL MSFT GOOG BTC-USD"
   exit
+fi
+
+if [ -z "$SYMBOLS" ] && [ -f $CONFIG ]; then
+  SYMBOLS=($(cat $CONFIG))
 fi
 
 FIELDS=(symbol shortName marketState regularMarketPrice regularMarketChange regularMarketChangePercent
