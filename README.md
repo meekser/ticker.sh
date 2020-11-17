@@ -37,7 +37,7 @@ $ ./ticker.sh --loop 5
 $ COLOR_BOLD="\e[38;5;248m" \
   COLOR_GREEN="\e[38;5;154m" \
   COLOR_RED="\e[38;5;202m" \
-  ./ticker.sh AAPL
+  ./ticker.sh --loop 10
 
 # Disable colors:
 $ NO_COLOR=1 ./ticker.sh AAPL
