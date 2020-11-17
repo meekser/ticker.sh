@@ -4,12 +4,12 @@
 
 `ticker.sh` is a simple shell script using the Yahoo Finance API as a data source. It features colored output and is able to display pre- and post-market prices.
 
-![ticker.sh](https://raw.githubusercontent.com/zdecamp/ticker.sh/master/screenshot.png)
+![ticker.sh](https://raw.githubusercontent.com/meekser/ticker.sh/master/screenshot.png)
 
 ## Install
 
 ```sh
-$ curl -o ticker.sh https://raw.githubusercontent.com/OfotViking/ticker.sh/master/ticker.sh
+$ curl -o ticker.sh https://raw.githubusercontent.com/meekser/ticker.sh/master/ticker.sh
 ```
 
 Make sure to install [jq](https://stedolan.github.io/jq/), a versatile command-line JSON processor.
@@ -20,8 +20,8 @@ Make sure to install [jq](https://stedolan.github.io/jq/), a versatile command-l
 # Single symbol:
 $ ./ticker.sh AAPL
 
-# Multiple symbols:
-$ ./ticker.sh AAPL MSFT GOOG BTC-USD
+# Multiple symbols (as per finance.yahoo.com):
+$ ./ticker.sh AAPL MSFT GOOG BTC-USD EUR=X
 
 # Create default example .conf file:
 # Default location ~/.config/ticker.conf

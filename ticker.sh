@@ -63,7 +63,7 @@ results=$(curl --silent "$API_ENDPOINT&fields=$fields&symbols=$symbols" |
 query() {
   echo $results | jq -r ".[] | select(.symbol == \"$1\") | .$2"
 }
-printf "%-12s%8s%12s%11s\n" "Symbol" "Price" "VAR" "%VAR"
+printf "%-12s%8s%13s%12s%7s\n" "Symbol" "Price" "VAR" "%VAR" "Name"
 for symbol in $(
   IFS=' '
   echo "${SYMBOLS[*]}" | tr '[:lower:]' '[:upper:]'
