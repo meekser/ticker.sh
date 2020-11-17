@@ -6,6 +6,7 @@
 
 ![ticker.sh](https://raw.githubusercontent.com/meekser/ticker.sh/master/screenshot.png)
 
+
 ## Install
 
 ```sh
@@ -21,7 +22,9 @@ Make sure to install [jq](https://stedolan.github.io/jq/), a versatile command-l
 $ ./ticker.sh AAPL
 
 # Multiple symbols (as per finance.yahoo.com):
+```
 ![ticker.sh](https://raw.githubusercontent.com/meekser/ticker.sh/master/ticker.png)
+```sh
 $ ./ticker.sh AAPL MSFT GOOG BTC-USD EUR=X
 
 # Create default example .conf file:
